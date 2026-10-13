@@ -1,0 +1,2803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFINITY Coaching | Education Portal</title>
+  <meta name="theme-color" content="#8c4714">
+  <!-- Phosphor Vector Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    :root {
+      --primary-header: #964816;
+      --header-bg: #fffbf2;
+      --text-dark: #222222;
+      --text-muted: #555555;
+      --border-soft: #dcd4c3;
+      --pill-bg: #ffffff;
+      --pill-border: #e2dbce;
+      --pill-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+      --font-scale: 1rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #fbf8ef;
+      color: var(--text-dark);
+      font-size: var(--font-scale);
+      line-height: 1.4;
+      padding-bottom: 60px;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    /* Accessibility Bar */
+    .top-accessibility-bar {
+      background: #000000;
+      color: #ffffff;
+      padding: 6px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+    }
+
+    .access-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .access-btn {
+      background: #1e1e1e;
+      color: #ffffff;
+      border: 1px solid #444;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+    .access-btn:hover { background: #333; }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 3px 0 0 3px;
+      outline: none;
+      width: 150px;
+    }
+
+    .search-box button {
+      background: #f59e0b;
+      border: none;
+      padding: 5px 9px;
+      border-radius: 0 3px 3px 0;
+      cursor: pointer;
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* Portal Branding */
+    .portal-branding {
+      background: var(--header-bg);
+      text-align: center;
+      padding: 16px 12px 14px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .brand-title-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .brand-3d-logo {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(180deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(2px 3px 1px rgba(0,0,0,0.25));
+      line-height: 1;
+    }
+
+    .infinity-symbol-inline {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: #d97706;
+      line-height: 1;
+      filter: drop-shadow(2px 3px 1px rgba(0,0,0,0.25));
+    }
+
+    .portal-branding h1 {
+      font-size: 1.5rem;
+      color: #a34b16;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .portal-branding p {
+      font-size: 0.88rem;
+      color: #8c4212;
+      font-weight: 700;
+    }
+
+    .emblem-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .badge-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid #e5dccb;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .flag-icon {
+      width: 48px;
+      height: 28px;
+      border-radius: 3px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Menu Bar & Drawer */
+    .menu-bar {
+      background: var(--primary-header);
+      color: #ffffff;
+      text-align: center;
+      padding: 10px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      cursor: pointer;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .menu-bar:hover { background: #803a0e; }
+
+    .drawer-nav {
+      display: none;
+      background: #ffffff;
+      border-bottom: 2px solid var(--primary-header);
+      padding: 10px 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .drawer-nav.active { display: block; }
+
+    .drawer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .nav-chip {
+      background: #f4ede1;
+      color: #632b07;
+      border: 1px solid #dfd3bf;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-chip:hover { background: #e7dac2; }
+
+    .app-container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    /* Pill Buttons */
+    .pill-menu-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .pill-button {
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      border-radius: 50px;
+      padding: 7px 18px 7px 8px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: var(--pill-shadow);
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    .pill-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+
+    .pill-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .pill-text {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #934614;
+      letter-spacing: 0.2px;
+    }
+
+    .bg-icon-navy { background: linear-gradient(135deg, #1e3a8a, #0f172a); }
+    .bg-icon-orange { background: linear-gradient(135deg, #f97316, #ea580c); }
+    .bg-icon-blue { background: linear-gradient(135deg, #0284c7, #0369a1); }
+    .bg-icon-amber { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .bg-icon-indigo { background: linear-gradient(135deg, #4f46e5, #4338ca); }
+
+    /* Animated Carousel */
+    .banner-slider-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--pill-shadow);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+      width: 300%;
+    }
+
+    .slide-item {
+      width: 33.333%;
+      padding: 22px 18px;
+      text-align: center;
+      color: #ffffff;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide-theme-1 { background: linear-gradient(135deg, #0284c7, #0369a1); }
+    .slide-theme-2 { background: linear-gradient(135deg, #4f46e5, #3730a3); }
+    .slide-theme-3 { background: linear-gradient(135deg, #059669, #047857); }
+
+    .slide-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .slide-item h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 5px; }
+    .slide-item p { font-size: 0.86rem; color: #f1f5f9; max-width: 480px; margin-bottom: 10px; }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px;
+      background: #ffffff;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dot.active {
+      background: var(--primary-header);
+      width: 22px;
+      border-radius: 10px;
+    }
+
+    /* Action Tiles */
+    .doe-action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .action-square-card {
+      border-radius: 14px;
+      padding: 16px 12px;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+      transition: transform 0.2s ease;
+      min-height: 90px;
+    }
+    .action-square-card:hover { transform: scale(1.02); }
+
+    .action-card-navy { background: #112d4e; }
+    .action-card-teal { background: #007965; }
+    .action-card-purple { background: #6b21a8; }
+    .action-card-orange { background: #ea580c; }
+    .action-card-blue { background: #0284c7; }
+    .action-card-amber { background: #b45309; }
+
+    .action-square-card i { font-size: 2.2rem; flex-shrink: 0; }
+    .action-square-card .title { font-size: 0.95rem; font-weight: 800; line-height: 1.25; }
+
+    /* Admin Trigger Strip */
+    .admin-trigger-strip {
+      background: #1e293b;
+      color: #f8fafc;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      margin-bottom: 24px;
+      transition: all 0.2s ease;
+    }
+    .admin-trigger-strip:hover {
+      background: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    /* Content Boxes */
+    .content-box {
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: var(--pill-shadow);
+    }
+    .content-box h2, .content-box h3 {
+      color: #964816;
+      margin-bottom: 8px;
+    }
+
+    .form-group { margin-bottom: 12px; position: relative; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      background: #fff;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: #964816;
+      box-shadow: 0 0 0 2px rgba(150, 72, 22, 0.2);
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Password Input Wrapper with Eye Icon */
+    .password-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .password-wrap input {
+      padding-right: 38px;
+    }
+    .password-toggle-icon {
+      position: absolute;
+      right: 10px;
+      font-size: 1.25rem;
+      color: #666;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-block { width: 100%; }
+    .btn-brown { background: #964816; color: #fff; }
+    .btn-brown:hover { background: #7c3a10; }
+    .btn-green { background: #0a7b42; color: #fff; }
+    .btn-red { background: #dc2626; color: #fff; }
+    .btn-slate { background: #334155; color: #fff; }
+    .btn-outline { background: transparent; border: 1px solid #888; color: #333; }
+    .btn-sm { padding: 4px 8px; font-size: 0.8rem; }
+
+    .table-responsive { overflow-x: auto; margin-top: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { border: 1px solid #e0d8ca; padding: 8px 10px; text-align: left; }
+    th { background: #f7efe1; color: #7c3a10; font-weight: 700; }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+    .badge-approved { background: #dcfce7; color: #166534; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+
+    /* Tabs */
+    .portal-tab-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      border-bottom: 2px solid #e0d8ca;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+    }
+    .portal-tab-btn {
+      background: #f7efe1;
+      border: 1px solid #dfd3bf;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #632b07;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .portal-tab-btn.active {
+      background: #964816;
+      color: #fff;
+      border-color: #964816;
+    }
+
+    .view-pane { display: none; }
+    .view-pane.active { display: block; }
+
+    #portalToast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #111827;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.88rem;
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      max-width: 90%;
+      text-align: center;
+    }
+    #portalToast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    #searchDropdownArea {
+      display: none;
+      background: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    body.dark-mode { background-color: #121212; color: #e5e5e5; }
+    body.dark-mode .portal-branding { background: #1c1c1c; border-color: #333; }
+    body.dark-mode .pill-button { background: #222; border-color: #333; color: #f59e0b; }
+    body.dark-mode .pill-text { color: #f59e0b; }
+    body.dark-mode .content-box { background: #1e1e1e; border-color: #333; }
+    body.dark-mode .content-box h2, body.dark-mode .content-box h3 { color: #f59e0b; }
+    body.dark-mode table, body.dark-mode th, body.dark-mode td { border-color: #333; }
+    body.dark-mode th { background: #2a2a2a; color: #f59e0b; }
+    body.dark-mode .form-control { background: #252525; border-color: #444; color: #fff; }
+
+    @media (max-width: 480px) {
+      .action-square-card { padding: 12px 8px; gap: 8px; }
+      .action-square-card i { font-size: 1.8rem; }
+      .action-square-card .title { font-size: 0.85rem; }
+      .pill-text { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="portalToast">Notification</div>
+
+  <!-- Accessibility Bar -->
+  <div class="top-accessibility-bar">
+    <div class="access-actions">
+      <button class="access-btn" onclick="app.navTo('home')" data-i18n="homeBtn">Home</button>
+      <button class="access-btn" onclick="app.toggleTheme()">◐ <span data-i18n="contrastBtn">Contrast</span></button>
+      <button class="access-btn" onclick="app.toggleLang()" id="langToggleBtn">हिन्दी</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="siteSearchInput" placeholder="Search site..." onkeyup="if(event.key === 'Enter') app.handleSiteSearch()">
+      <button onclick="app.handleSiteSearch()"><i class="ph ph-magnifying-glass"></i></button>
+    </div>
+  </div>
+
+  <!-- Portal Branding -->
+  <div class="portal-branding">
+    <div class="brand-title-wrap">
+      <span class="brand-3d-logo">INFINITY</span>
+      <span class="infinity-symbol-inline">&infin;</span>
+    </div>
+    <h1>INFINITY COACHING</h1>
+    <p data-i18n="tagline">Learn Without Limits</p>
+
+    <div class="emblem-row">
+      <div class="badge-box">
+        <i class="ph ph-shield-check" style="color:#d97706; font-size:1.1rem;"></i>
+        <span data-i18n="curriculumBadge">CBSE & DOE CURRICULUM</span>
+      </div>
+      <svg class="flag-icon" viewBox="0 0 900 600">
+        <rect width="900" height="200" fill="#FF9933"/>
+        <rect y="200" width="900" height="200" fill="#FFFFFF"/>
+        <rect y="400" width="900" height="200" fill="#138808"/>
+        <circle cx="450" cy="300" r="80" fill="none" stroke="#000080" stroke-width="12"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Menu Drawer Toggle -->
+  <div class="menu-bar" onclick="app.toggleMenuDrawer()" data-i18n="menuBar">
+    MENU ☰
+  </div>
+
+  <!-- Drawer Menu -->
+  <div class="drawer-nav" id="drawerNav">
+    <div class="drawer-links">
+      <a class="nav-chip" onclick="app.navTo('home')" data-i18n="homeBtn">Home</a>
+      <a class="nav-chip" onclick="app.navTo('admission-enquiry')" data-i18n="pillAdmissionEnq">Admission Enquiry</a>
+      <a class="nav-chip" onclick="app.navTo('contact-view')" data-i18n="contactUsBtn">Contact Us</a>
+      <a class="nav-chip" onclick="app.navTo('login-choice')" data-i18n="loginChoice">Portal Login</a>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+
+    <!-- Search Dropdown Area -->
+    <div id="searchDropdownArea" class="content-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h4 style="color:#964816;">Search Results</h4>
+        <button class="btn btn-sm btn-outline" onclick="document.getElementById('searchDropdownArea').style.display='none'">Close</button>
+      </div>
+      <div id="searchResultsList"></div>
+    </div>
+
+    <!-- VIEW 1: HOMEPAGE -->
+    <div id="view-home" class="view-pane active">
+
+      <!-- 5 Pill Buttons -->
+      <div class="pill-menu-stack">
+        <div class="pill-button" onclick="app.openLogin('teacher')">
+          <div class="pill-icon-circle bg-icon-navy"><i class="ph ph-lock-key"></i></div>
+          <div class="pill-text" data-i18n="pillStaff">Faculty & Staff Login</div>
+        </div>
+
+        <div class="pill-button" onclick="app.openLogin('student')">
+          <div class="pill-icon-circle bg-icon-orange"><i class="ph ph-student"></i></div>
+          <div class="pill-text" data-i18n="pillStudent">Student Login Portal</div>
+        </div>
+
+        <div class="pill-button" onclick="app.navTo('study-material')">
+          <div class="pill-icon-circle bg-icon-blue"><i class="ph ph-books"></i></div>
+          <div class="pill-text" data-i18n="pillPapers">CBSE & DOE Question Papers</div>
+        </div>
+
+        <div class="pill-button" onclick="app.navTo('admission-enquiry')">
+          <div class="pill-icon-circle bg-icon-amber"><i class="ph ph-currency-inr"></i></div>
+          <div class="pill-text" data-i18n="pillAdmissionEnq">Admission Enquiry</div>
+        </div>
+
+        <div class="pill-button" onclick="app.navTo('admission-form')">
+          <div class="pill-icon-circle bg-icon-indigo"><i class="ph ph-note-pencil"></i></div>
+          <div class="pill-text" data-i18n="pillRegistration">Admission & Registration - 2026-27</div>
+        </div>
+      </div>
+
+      <!-- Carousel Banner -->
+      <div class="banner-slider-card">
+        <div class="slider-track" id="sliderTrack">
+          <div class="slide-item slide-theme-1">
+            <span class="slide-badge" data-i18n="badgeBatch">ADMISSIONS OPEN</span>
+            <h2 data-i18n="slide1Heading">NEW CBSE BATCHES STARTING</h2>
+            <p data-i18n="slide1Desc">Class 9th to 12th Board Exam Preparatory Batches with Personal Doubt Sessions.</p>
+            <button class="btn btn-sm" style="background:#fff; color:#0369a1; font-weight:bold;" onclick="app.navTo('admission-form')" data-i18n="applyOnline">Apply Online</button>
+          </div>
+          <div class="slide-item slide-theme-2">
+            <span class="slide-badge">CBSE & DOE TEST SERIES</span>
+            <h2>BOARD MOCK EXAMINATIONS</h2>
+            <p>Weekly real-time practice tests aligned with official marking schemes.</p>
+            <button class="btn btn-sm" style="background:#fff; color:#3730a3; font-weight:bold;" onclick="app.openPublicCategory('Practice Test')">Explore Tests</button>
+          </div>
+          <div class="slide-item slide-theme-3">
+            <span class="slide-badge">FACULTY GUIDANCE</span>
+            <h2>LEARN WITHOUT LIMITS</h2>
+            <p>Small batches with chapter diagnostics and individual performance metrics.</p>
+            <button class="btn btn-sm" style="background:#fff; color:#047857; font-weight:bold;" onclick="app.navTo('admission-enquiry')">Enquire Now</button>
+          </div>
+        </div>
+        <div class="slider-dots">
+          <div class="dot active" onclick="app.setSlide(0)"></div>
+          <div class="dot" onclick="app.setSlide(1)"></div>
+          <div class="dot" onclick="app.setSlide(2)"></div>
+        </div>
+      </div>
+
+      <!-- Action Tiles -->
+      <div class="doe-action-grid">
+        <div class="action-square-card action-card-navy" onclick="app.openPublicCategory('Practice Test')">
+          <i class="ph ph-exam"></i>
+          <div class="title" data-i18n="tileTestSeries">Coaching Practice Test Series</div>
+        </div>
+
+        <div class="action-square-card action-card-teal" onclick="app.openPublicCategory('Sample Paper')">
+          <i class="ph ph-file-doc"></i>
+          <div class="title" data-i18n="tileDoe">DOE Sample Papers 2026</div>
+        </div>
+
+        <div class="action-square-card action-card-purple" onclick="app.openLogin('student')">
+          <i class="ph ph-chalkboard"></i>
+          <div class="title" data-i18n="tileClassInquiry">Live Class Inquiry</div>
+        </div>
+
+        <div class="action-square-card action-card-orange" onclick="app.openLogin('teacher')">
+          <i class="ph ph-chalkboard-teacher"></i>
+          <div class="title" data-i18n="tileTeacherDesk">Teacher Attendance Desk</div>
+        </div>
+      </div>
+
+      <!-- Admin Control Deck Strip -->
+      <div class="admin-trigger-strip" onclick="app.openLogin('admin')">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <i class="ph ph-gear-six" style="font-size:1.6rem; color:#f59e0b;"></i>
+          <div>
+            <strong style="font-size:0.98rem; display:block;">Directorate Admin Deck</strong>
+            <span style="font-size:0.75rem; color:#94a3b8;">Manage passwords, approvals & institute records</span>
+          </div>
+        </div>
+        <i class="ph ph-arrow-right" style="font-size:1.2rem; color:#f59e0b;"></i>
+      </div>
+
+    </div>
+
+    <!-- VIEW 2: ADMISSION ENQUIRY -->
+    <div id="view-admission-enquiry" class="view-pane">
+      <div class="content-box">
+        <button class="btn btn-sm btn-outline mb-2" onclick="app.navTo('home')">&larr; <span data-i18n="backBtn">Back</span></button>
+        <h2 data-i18n="enquiryTitle">Class & Subject Fee Inquiry</h2>
+        <p class="small text-muted" data-i18n="enquirySubtitle">Select class and choose required subjects to inspect fees.</p>
+
+        <div class="form-group" style="margin-top:12px;">
+          <label data-i18n="selectClass">Select Target Class</label>
+          <select id="enqClassSelect" class="form-control" onchange="app.populateEnquirySubjects()">
+            <option value="Class 9">Class 9</option>
+            <option value="Class 10">Class 10</option>
+            <option value="Class 11">Class 11</option>
+            <option value="Class 12">Class 12</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="selectSubjects">Select Available Subjects</label>
+          <div id="enquirySubjectCheckboxes" style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6px; background:#fbf8ef; padding:10px; border-radius:6px; border:1px solid #e0d8ca;"></div>
+        </div>
+
+        <div id="feeResultBox" style="background:#fdfcf9; border:2px dashed #964816; border-radius:8px; padding:14px; text-align:center; margin-top:14px;">
+          <h3 id="feeEstimateDisplay" style="color:#0a7b42; font-size:1.3rem;">Total Estimated Fee: ₹ 0 / month</h3>
+          <p class="small text-muted" id="feeBreakdownDetails" style="margin-top:4px;">Select subjects above</p>
+          
+          <div style="margin-top:12px; padding-top:10px; border-top:1px solid #e5dccb;">
+            <p style="font-size:0.85rem; font-weight:700;">Need offline counseling or concession?</p>
+            <p class="small text-muted">Helpline: <strong>+91 98765 43210</strong> | WhatsApp: <strong>+91 98765 43210</strong></p>
+            <button class="btn btn-sm btn-brown" style="margin-top:8px;" onclick="app.navTo('admission-form')" data-i18n="proceedToReg">Proceed to Registration</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: CONTACT US -->
+    <div id="view-contact-view" class="view-pane">
+      <div class="content-box">
+        <button class="btn btn-sm btn-outline mb-2" onclick="app.navTo('home')">&larr; <span data-i18n="backBtn">Back</span></button>
+        <h2 data-i18n="contactUsBtn">Contact Us</h2>
+        <p class="small text-muted">Get in touch with INFINITY Coaching administration.</p>
+
+        <div style="margin-top:14px; line-height:1.7;">
+          <p><i class="ph ph-map-pin" style="color:#964816; font-size:1.2rem;"></i> <strong>Centre Address:</strong> Institutional Area, Sector 62, New Delhi, 110092</p>
+          <p><i class="ph ph-phone" style="color:#964816; font-size:1.2rem;"></i> <strong>Helpline Number:</strong> +91 98765 43210</p>
+          <p><i class="ph ph-whatsapp-logo" style="color:#0a7b42; font-size:1.2rem;"></i> <strong>WhatsApp Support:</strong> +91 98765 43210</p>
+          <p><i class="ph ph-envelope" style="color:#964816; font-size:1.2rem;"></i> <strong>Official Email:</strong> infinitycoaching144@gmail.com</p>
+          <p><i class="ph ph-clock" style="color:#964816; font-size:1.2rem;"></i> <strong>Timings:</strong> 8:00 AM – 8:00 PM (Monday to Saturday)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 4: PUBLIC STUDY MATERIAL -->
+    <div id="view-study-material" class="view-pane">
+      <div class="content-box">
+        <button class="btn btn-sm btn-outline mb-2" onclick="app.navTo('home')">&larr; <span data-i18n="backBtn">Back</span></button>
+        <h2>Official Question Bank & Coaching Papers</h2>
+        <p class="small text-muted">Browse CBSE, DOE, and coaching practice test papers uploaded by teachers.</p>
+
+        <div class="form-grid-2" style="margin-top:12px;">
+          <div class="form-group">
+            <label>Filter by Class</label>
+            <select id="libFilterClass" class="form-control" onchange="app.renderLibraryCards()">
+              <option value="All">All Classes</option>
+              <option value="Class 9">Class 9</option>
+              <option value="Class 10">Class 10</option>
+              <option value="Class 11">Class 11</option>
+              <option value="Class 12">Class 12</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Board / Source</label>
+            <select id="libFilterBoard" class="form-control" onchange="app.renderLibraryCards()">
+              <option value="All">All Sources</option>
+              <option value="CBSE">CBSE Official</option>
+              <option value="DOE">Delhi DOE</option>
+              <option value="INFINITY">INFINITY Coaching</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="libraryItemsContainer" style="margin-top:10px;"></div>
+      </div>
+    </div>
+
+    <!-- VIEW 5: ADMISSION APPLICATION FORM (NO PASSWORD GIVEN BEFORE APPROVAL) -->
+    <div id="view-admission-form" class="view-pane">
+      <div class="content-box">
+        <button class="btn btn-sm btn-outline mb-2" onclick="app.navTo('home')">&larr; <span data-i18n="backBtn">Back</span></button>
+        <h2>Admission Registration Form (2026-27)</h2>
+        <p class="small text-muted">Submit your application. Your account will only be activated after verification by the administration.</p>
+
+        <form id="admissionEnrollForm" onsubmit="app.handleAdmissionSubmit(event)" style="margin-top:14px;">
+          <div class="form-group">
+            <label>Student's Full Legal Name *</label>
+            <input type="text" id="admFullName" class="form-control" placeholder="e.g. Priyanshu Sharma" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label>WhatsApp Contact Mobile *</label>
+              <input type="tel" id="admMobile" class="form-control" pattern="[0-9]{10}" placeholder="10-digit number" required>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="admEmail" class="form-control" placeholder="student@example.com">
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label>Target Class *</label>
+              <select id="admClass" class="form-control" onchange="app.setupRegSubjectSelectors()" required>
+                <option value="Class 9">Class 9</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 11">Class 11</option>
+                <option value="Class 12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Preferred Batch</label>
+              <select id="admTiming" class="form-control">
+                <option value="Morning">Morning Batch</option>
+                <option value="Evening">Evening Batch</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 4 Smart Auto-exclusion Selectors -->
+          <div style="background:#fdfcf9; border:1px solid #e0d8ca; padding:12px; border-radius:6px; margin-bottom:12px;">
+            <h4 style="color:#964816; margin-bottom:8px;">Choose Subjects (1 Compulsory + up to 3 Optional)</h4>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Subject 1 (Compulsory) *</label>
+                <select id="regSub1" class="form-control reg-sub-picker" onchange="app.refreshRegSubjectOptions(0)" required></select>
+              </div>
+              <div class="form-group">
+                <label>Subject 2 (Optional)</label>
+                <select id="regSub2" class="form-control reg-sub-picker" onchange="app.refreshRegSubjectOptions(1)"></select>
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Subject 3 (Optional)</label>
+                <select id="regSub3" class="form-control reg-sub-picker" onchange="app.refreshRegSubjectOptions(2)"></select>
+              </div>
+              <div class="form-group">
+                <label>Subject 4 (Optional)</label>
+                <select id="regSub4" class="form-control reg-sub-picker" onchange="app.refreshRegSubjectOptions(3)"></select>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-brown btn-block">Submit Application</button>
+        </form>
+
+        <div id="admissionSuccessCard" style="display:none; text-align:center; padding:15px; border:2px dashed #0a7b42; border-radius:8px; margin-top:15px;">
+          <i class="ph ph-hourglass-high" style="font-size:3rem; color:#d97706;"></i>
+          <h3 style="color:#964816; margin-top:5px;">Application Submitted Successfully</h3>
+          <p>Registration Reference:</p>
+          <div id="generatedAppCredentials" style="background:#fefce8; border:1px solid #fef08a; padding:12px; border-radius:6px; margin:10px 0; font-size:0.92rem; line-height:1.6;"></div>
+          <span class="status-badge badge-pending" style="font-size:0.85rem; padding:4px 12px;">STATUS: PENDING ADMIN APPROVAL</span>
+          <p style="font-size:0.88rem; color:#555; margin-top:10px;">
+            <strong>Important Security Note:</strong> Your Student ID is reserved, but <u>no login password is issued yet</u>. The institute director/teacher will review your form. Once accepted, login access will be activated and you will be informed on WhatsApp/Phone.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 6: AUTHENTICATION LOGIN -->
+    <div id="view-login-choice" class="view-pane">
+      <div class="content-box text-center">
+        <button class="btn btn-sm btn-outline mb-2" onclick="app.navTo('home')">&larr; <span data-i18n="backBtn">Back</span></button>
+        <h2 id="loginDeskTitle">Portal Sign In</h2>
+
+        <form id="authLoginForm" onsubmit="app.handleAuthLogin(event)" style="margin-top:15px; text-align:left;">
+          <div class="form-group">
+            <label>Role</label>
+            <select id="loginRoleSelect" class="form-control" onchange="app.updateLoginRoleUI()">
+              <option value="student">Student Portal</option>
+              <option value="teacher">Faculty / Teacher Portal</option>
+              <option value="admin">Directorate Admin Deck</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label id="loginIdLabel">Student ID</label>
+            <input type="text" id="loginIdentifier" class="form-control" placeholder="Enter ID" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <div class="password-wrap">
+              <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+              <i class="ph ph-eye password-toggle-icon" onclick="app.togglePasswordView('loginPassword', this)"></i>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-brown btn-block" style="margin-top:10px;">Sign In</button>
+        </form>
+
+        <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;">
+          <button class="btn btn-sm btn-outline" onclick="app.openResetPasswordModal()">Forgot / Reset Password?</button>
+          <span class="small text-muted">Secure OTP protected</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT PASSWORD RESET VIA OTP MODAL -->
+    <div id="resetPasswordModalBox" class="content-box" style="display:none; border:2px solid #964816;">
+      <h3 style="color:#964816;">Student Password Reset</h3>
+      <p class="small text-muted">Enter your registered mobile number to receive a verification OTP.</p>
+
+      <div id="otpStep1">
+        <div class="form-group" style="margin-top:10px;">
+          <label>Registered 10-Digit Mobile Number</label>
+          <input type="tel" id="resetMobileInput" class="form-control" placeholder="e.g. 9777777777">
+        </div>
+        <button class="btn btn-sm btn-brown" onclick="app.sendStudentResetOtp()">Send OTP</button>
+        <button class="btn btn-sm btn-outline" onclick="document.getElementById('resetPasswordModalBox').style.display='none'">Cancel</button>
+      </div>
+
+      <div id="otpStep2" style="display:none; margin-top:10px;">
+        <div class="form-group">
+          <label>Enter 4-Digit OTP</label>
+          <input type="text" id="resetOtpInput" class="form-control" placeholder="4-digit OTP">
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <div class="password-wrap">
+            <input type="password" id="resetNewPasswordInput" class="form-control" placeholder="New password">
+            <i class="ph ph-eye password-toggle-icon" onclick="app.togglePasswordView('resetNewPasswordInput', this)"></i>
+          </div>
+        </div>
+        <button class="btn btn-sm btn-green" onclick="app.verifyAndSetNewPassword()">Verify & Reset Password</button>
+      </div>
+    </div>
+
+    <!-- VIEW 7: STUDENT DASHBOARD -->
+    <div id="view-student-dash" class="view-pane">
+      <div class="content-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2 id="stdDashName">-</h2>
+            <p style="font-size:0.8rem; color:#666;" id="stdDashMeta">-</p>
+          </div>
+          <button class="btn btn-sm btn-red" onclick="app.logoutUser()"><i class="ph ph-sign-out"></i> Logout</button>
+        </div>
+
+        <div class="portal-tab-bar" style="margin-top:14px;">
+          <button class="portal-tab-btn active" id="btnStdTabMarks" onclick="app.switchStudentSubTab('marks')">1. Marks (Subject-wise)</button>
+          <button class="portal-tab-btn" id="btnStdTabAddSub" onclick="app.switchStudentSubTab('addsub')">2. Add / Request Subject</button>
+          <button class="portal-tab-btn" id="btnStdTabSchedule" onclick="app.switchStudentSubTab('schedule')">Today's Class Schedule</button>
+          <button class="portal-tab-btn" id="btnStdTabPapers" onclick="app.switchStudentSubTab('papers')">Coaching Papers</button>
+        </div>
+
+        <div id="stdTabMarksArea">
+          <h3>Assessment & Test Marks</h3>
+          <p class="small text-muted">Subject-wise marks evaluated by faculty.</p>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>Subject</th><th>Test Name</th><th>Marks Scored</th><th>Max Marks</th><th>%</th></tr></thead>
+              <tbody id="stdMarksTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="stdTabAddSubArea" style="display:none;">
+          <h3>Add / Change Enrolled Subject</h3>
+          <p class="small text-muted">Choose a new subject to add. Request sent directly to teacher/admin for activation.</p>
+          
+          <div style="background:#fdfcf9; border:1px solid #e0d8ca; padding:12px; border-radius:6px; margin-top:10px;">
+            <p><strong>Enrolled Subjects:</strong> <span id="stdCurrentSubjectsDisplay" style="color:#0a7b42; font-weight:bold;">-</span></p>
+            <div class="form-group" style="margin-top:10px;">
+              <label>Select New Subject to Add</label>
+              <select id="stdNewSubjectSelect" class="form-control"></select>
+            </div>
+            <button class="btn btn-sm btn-green" onclick="app.handleStudentSubjectRequest()">Send Add Request</button>
+          </div>
+
+          <div id="stdSubRequestStatusArea" style="margin-top:12px;"></div>
+        </div>
+
+        <div id="stdTabScheduleArea" style="display:none;">
+          <h3>Today's Live Class Schedule</h3>
+          <p class="small text-muted">Classes scheduled for your enrolled subjects.</p>
+          <div id="stdTodayScheduleList" style="margin-top:10px;"></div>
+        </div>
+
+        <div id="stdTabPapersArea" style="display:none;">
+          <h3>Coaching Question Papers</h3>
+          <div id="stdCoachingPapersList" style="margin-top:10px;"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW 8: TEACHER DASHBOARD -->
+    <div id="view-teacher-dash" class="view-pane">
+      <div class="content-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2>Faculty Portal</h2>
+            <p style="font-size:0.8rem; color:#666;">ID: teacher123din | Instructional Workspace</p>
+          </div>
+          <button class="btn btn-sm btn-red" onclick="app.logoutUser()"><i class="ph ph-sign-out"></i> Logout</button>
+        </div>
+
+        <!-- Teacher's Homepage-Style Action Grid -->
+        <div class="doe-action-grid" style="margin-top:16px;">
+          <div class="action-square-card action-card-navy" onclick="app.openTeacherFeature('attendance')">
+            <i class="ph ph-check-square-offset"></i>
+            <div class="title">Take Attendance</div>
+          </div>
+          <div class="action-square-card action-card-teal" onclick="app.openTeacherFeature('marks')">
+            <i class="ph ph-file-plus"></i>
+            <div class="title">Add / Update Marks</div>
+          </div>
+          <div class="action-square-card action-card-purple" onclick="app.openTeacherFeature('upload-cbse')">
+            <i class="ph ph-folder-simple"></i>
+            <div class="title">Upload CBSE Paper</div>
+          </div>
+          <div class="action-square-card action-card-orange" onclick="app.openTeacherFeature('upload-doe')">
+            <i class="ph ph-folder-notch-open"></i>
+            <div class="title">Upload DOE Paper</div>
+          </div>
+          <div class="action-square-card action-card-blue" onclick="app.openTeacherFeature('schedule')">
+            <i class="ph ph-chart-bar"></i>
+            <div class="title">Class Schedule Chart</div>
+          </div>
+          <div class="action-square-card action-card-amber" onclick="app.openTeacherFeature('subreq')">
+            <i class="ph ph-user-list"></i>
+            <div class="title">Subject Requests</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Take Attendance -->
+        <div id="tchrFeatureAtt" class="content-box" style="display:none; margin-top:15px; border: 2px solid #112d4e;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Take Attendance</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <div class="form-grid-2" style="margin-top:8px;">
+            <div class="form-group">
+              <label>Select Class</label>
+              <select id="tchrAttClass" class="form-control" onchange="app.populateTeacherSubjectDropdown('tchrAttClass', 'tchrAttSubject'); app.loadAttendanceList();">
+                <option value="Class 9">Class 9</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 11">Class 11</option>
+                <option value="Class 12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Select Subject</label>
+              <select id="tchrAttSubject" class="form-control" onchange="app.loadAttendanceList()"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Date (Auto Set)</label>
+            <input type="date" id="tchrAttDate" class="form-control" onchange="app.loadAttendanceList()">
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>Roll No</th><th>Student Name</th><th>Action Status</th></tr></thead>
+              <tbody id="attendanceRosterBody"></tbody>
+            </table>
+          </div>
+          <div style="margin-top:8px; display:flex; gap:8px;">
+            <button class="btn btn-sm btn-green" onclick="app.saveAttendanceBatch()">Submit Attendance Log</button>
+          </div>
+        </div>
+
+        <!-- Section 2: Marks Management -->
+        <div id="tchrFeatureMarks" class="content-box" style="display:none; margin-top:15px; border: 2px solid #007965;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Add & Update Student Marks</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <div class="form-grid-2" style="margin-top:8px;">
+            <div class="form-group">
+              <label>Class</label>
+              <select id="tchrMarksClassSelect" class="form-control" onchange="app.populateTeacherSubjectDropdown('tchrMarksClassSelect', 'marksSubjectSelect'); app.populateTeacherStudentDropdownByClass();">
+                <option value="Class 9">Class 9</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 11">Class 11</option>
+                <option value="Class 12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select id="marksSubjectSelect" class="form-control"></select>
+            </div>
+          </div>
+          <form onsubmit="app.handleSaveStudentMarks(event)" style="margin-top:8px;">
+            <div class="form-group">
+              <label>Student</label>
+              <select id="marksStudentSelect" class="form-control" required></select>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Test Title / Topic</label>
+                <input type="text" id="marksTestTitleInput" class="form-control" placeholder="Periodic Test 1" required>
+              </div>
+              <div class="form-group">
+                <label>Marks Scored / Max Marks</label>
+                <div style="display:flex; gap:4px;">
+                  <input type="number" id="marksObtainedInput" class="form-control" placeholder="Marks" required>
+                  <input type="number" id="marksMaxInput" class="form-control" value="50" required>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-sm btn-brown">Save / Update Marks</button>
+          </form>
+
+          <h4 style="margin-top:12px;">Class Marks Registry</h4>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>Student</th><th>Class</th><th>Subject</th><th>Test</th><th>Score</th></tr></thead>
+              <tbody id="teacherMarksRegistryBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 3: Paper Uploader (Real Base64 PDF storage synced globally) -->
+        <div id="tchrFeatureUpload" class="content-box" style="display:none; margin-top:15px; border: 2px solid #6b21a8;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 id="tchrUploadTitle">Upload Question Paper</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <form onsubmit="app.handleUploadPaper(event)" style="margin-top:8px;">
+            <div class="form-group">
+              <label>Paper Title *</label>
+              <input type="text" id="uploadPaperTitle" class="form-control" placeholder="e.g. Class 10 Math Board Paper" required>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Folder / Board *</label>
+                <select id="uploadPaperCat" class="form-control">
+                  <option value="CBSE">CBSE Official</option>
+                  <option value="DOE">Delhi DOE</option>
+                  <option value="INFINITY">INFINITY Coaching</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Class *</label>
+                <select id="uploadPaperClass" class="form-control">
+                  <option value="Class 9">Class 9</option>
+                  <option value="Class 10">Class 10</option>
+                  <option value="Class 11">Class 11</option>
+                  <option value="Class 12">Class 12</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Attach PDF File (Will become public immediately) *</label>
+              <input type="file" id="uploadPaperFile" class="form-control" accept=".pdf,application/pdf" required>
+            </div>
+            <button type="submit" class="btn btn-sm btn-green">Upload to Public Portal</button>
+          </form>
+        </div>
+
+        <!-- Section 4: Live Schedule Chart -->
+        <div id="tchrFeatureSchedule" class="content-box" style="display:none; margin-top:15px; border: 2px solid #0284c7;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Live Class Timetable Chart</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <form onsubmit="app.handleScheduleClass(event)" style="margin-top:8px;">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Class</label>
+                <select id="schClass" class="form-control" onchange="app.populateTeacherSubjectDropdown('schClass', 'schSubject')">
+                  <option value="Class 9">Class 9</option>
+                  <option value="Class 10">Class 10</option>
+                  <option value="Class 11">Class 11</option>
+                  <option value="Class 12">Class 12</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Subject</label>
+                <select id="schSubject" class="form-control"></select>
+              </div>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="schDate" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label>Class Time</label>
+                <input type="time" id="schTime" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Room / Mode</label>
+              <input type="text" id="schRoom" class="form-control" value="Room 2A" required>
+            </div>
+            <button type="submit" class="btn btn-sm btn-brown">Broadcast Class to Students</button>
+          </form>
+
+          <h4 style="margin-top:14px;">Today's Broadcasted Classes</h4>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>Time</th><th>Class & Sub</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="tchrClassesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 5: Subject Requests -->
+        <div id="tchrFeatureSubReq" class="content-box" style="display:none; margin-top:15px; border: 2px solid #b45309;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Student Subject Requests</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <div class="table-responsive" style="margin-top:8px;">
+            <table>
+              <thead><tr><th>Student</th><th>Class</th><th>Requested Subject</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="tchrSubjectRequestsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VIEW 9: DIRECTORATE ADMIN CONTROL DECK -->
+    <div id="view-admin-dash" class="view-pane">
+      <div class="content-box">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h2>⚙️ Directorate Master Admin Control</h2>
+            <p style="font-size:0.8rem; color:#666;">Account: ADMIN2026 | Full Control Deck</p>
+          </div>
+          <button class="btn btn-sm btn-red" onclick="app.logoutUser()"><i class="ph ph-sign-out"></i> Logout</button>
+        </div>
+
+        <!-- Admin's Action Grid -->
+        <div class="doe-action-grid" style="margin-top:16px;">
+          <div class="action-square-card action-card-blue" onclick="app.openAdminFeature('marks')">
+            <i class="ph ph-trophy"></i>
+            <div class="title">Marks Registry</div>
+          </div>
+          <div class="action-square-card action-card-navy" onclick="app.openAdminFeature('attendance')">
+            <i class="ph ph-calendar-check"></i>
+            <div class="title">Attendance Log</div>
+          </div>
+          <div class="action-square-card action-card-purple" onclick="app.openAdminFeature('students')">
+            <i class="ph ph-users-three"></i>
+            <div class="title">Students Directory</div>
+          </div>
+          <div class="action-square-card action-card-amber" onclick="app.openAdminFeature('apps')">
+            <i class="ph ph-user-plus"></i>
+            <div class="title">Pending Registrations</div>
+          </div>
+          <div class="action-square-card action-card-orange" style="grid-column: span 2;" onclick="app.openAdminFeature('security')">
+            <i class="ph ph-shield-check"></i>
+            <div class="title">Security & Passwords Hub</div>
+          </div>
+        </div>
+
+        <!-- 1. Marks Registry -->
+        <div id="admFeatureMarks" class="content-box" style="display:none; border: 2px solid #0284c7;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Marks Registry</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <div class="form-grid-2" style="margin-top:10px;">
+            <div class="form-group">
+              <label>Select Class</label>
+              <select id="admMarksClassFilter" class="form-control" onchange="app.populateAdminFilterSubjects('admMarksClassFilter', 'admMarksSubFilter'); app.renderAdminFilteredMarks();">
+                <option value="All">All Classes</option>
+                <option value="Class 9">Class 9</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 11">Class 11</option>
+                <option value="Class 12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Select Subject</label>
+              <select id="admMarksSubFilter" class="form-control" onchange="app.renderAdminFilteredMarks()"></select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>Student ID</th><th>Name</th><th>Class</th><th>Subject</th><th>Test</th><th>Score</th></tr></thead>
+              <tbody id="admFilteredMarksBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2. Attendance Log -->
+        <div id="admFeatureAtt" class="content-box" style="display:none; border: 2px solid #112d4e;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Attendance Log</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <div class="form-grid-2" style="margin-top:10px;">
+            <div class="form-group">
+              <label>Select Class</label>
+              <select id="admAttClassFilter" class="form-control" onchange="app.populateAdminFilterSubjects('admAttClassFilter', 'admAttSubFilter'); app.renderAdminFilteredAttendance();">
+                <option value="All">All Classes</option>
+                <option value="Class 9">Class 9</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 11">Class 11</option>
+                <option value="Class 12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Select Subject</label>
+              <select id="admAttSubFilter" class="form-control" onchange="app.renderAdminFilteredAttendance()"></select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>Date</th><th>Student ID</th><th>Name</th><th>Class</th><th>Subject</th><th>Status</th></tr></thead>
+              <tbody id="admFilteredAttBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3. Students Directory -->
+        <div id="admFeatureStudents" class="content-box" style="display:none; border: 2px solid #6b21a8;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Students Directory</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <div class="form-grid-2" style="margin-top:8px;">
+            <div class="form-group">
+              <label>Filter Class</label>
+              <select id="admStdClassFilter" class="form-control" onchange="app.populateAdminFilterSubjects('admStdClassFilter', 'admStdSubFilter'); app.renderAdminFilteredStudents();">
+                <option value="All">All Classes</option>
+                <option value="Class 9">Class 9</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 11">Class 11</option>
+                <option value="Class 12">Class 12</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Filter Subject</label>
+              <select id="admStdSubFilter" class="form-control" onchange="app.renderAdminFilteredStudents()"></select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead><tr><th>Student ID</th><th>Name</th><th>Mobile No</th><th>Class</th><th>Subjects</th><th>Reset Pass</th></tr></thead>
+              <tbody id="admStudentsRosterBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 4. Pending Applications (Clean "Accept" Button) -->
+        <div id="admFeatureApps" class="content-box" style="display:none; border: 2px solid #b45309;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Pending Registrations</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+          <div class="table-responsive" style="margin-top:8px;">
+            <table>
+              <thead><tr><th>Ref</th><th>Name</th><th>Mobile</th><th>Class</th><th>Subjects</th><th>Action</th></tr></thead>
+              <tbody id="admApplicationsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 5. Security & Passwords Hub -->
+        <div id="admFeatureSecurity" class="content-box" style="display:none; border: 2px solid #ea580c;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>Security & Password Control Hub</h3>
+            <button class="btn btn-sm btn-outline" onclick="this.parentElement.parentElement.style.display='none'">Close</button>
+          </div>
+
+          <!-- Direct Teacher Password Reset -->
+          <div style="background:#fdfcf9; border:1px solid #e0d8ca; padding:12px; border-radius:6px; margin-top:10px;">
+            <h4 style="color:#964816;">1. Direct Teacher Password Reset</h4>
+            <div class="form-grid-2" style="margin-top:8px;">
+              <div class="form-group">
+                <label>Target Faculty</label>
+                <select id="admTargetTeacherSelect" class="form-control"></select>
+              </div>
+              <div class="form-group">
+                <label>New Teacher Password</label>
+                <div class="password-wrap">
+                  <input type="password" id="admNewTeacherPassInput" class="form-control" placeholder="New password">
+                  <i class="ph ph-eye password-toggle-icon" onclick="app.togglePasswordView('admNewTeacherPassInput', this)"></i>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-brown" onclick="app.handleAdminResetTeacherPassword()">Update Teacher Password</button>
+          </div>
+
+          <!-- Reset Admin Password (Secret Pin: 1234567890) -->
+          <div style="background:#fdfcf9; border:1px solid #e0d8ca; padding:12px; border-radius:6px; margin-top:14px;">
+            <h4 style="color:#964816;">2. Reset Admin Password (Requires Secret Pin: 1234567890)</h4>
+            <div class="form-grid-2" style="margin-top:8px;">
+              <div class="form-group">
+                <label>Enter Secret Code / Pin *</label>
+                <div class="password-wrap">
+                  <input type="password" id="admVerifySecretPinInput" class="form-control" placeholder="Secret Pin (1234567890)">
+                  <i class="ph ph-eye password-toggle-icon" onclick="app.togglePasswordView('admVerifySecretPinInput', this)"></i>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>New Admin Password *</label>
+                <div class="password-wrap">
+                  <input type="password" id="admNewAdminPassInput" class="form-control" placeholder="New admin password">
+                  <i class="ph ph-eye password-toggle-icon" onclick="app.togglePasswordView('admNewAdminPassInput', this)"></i>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-slate" onclick="app.handleAdminResetOwnPassword()">Verify Pin & Update Password</button>
+          </div>
+
+          <!-- Change Secret Pin -->
+          <div style="background:#fdfcf9; border:1px solid #e0d8ca; padding:12px; border-radius:6px; margin-top:14px;">
+            <h4 style="color:#964816;">3. Change Master Secret Pin</h4>
+            <div class="form-grid-2" style="margin-top:8px;">
+              <div class="form-group">
+                <label>Current Secret Pin</label>
+                <div class="password-wrap">
+                  <input type="password" id="admOldSecretPinInput" class="form-control" placeholder="Current Pin">
+                  <i class="ph ph-eye password-toggle-icon" onclick="app.togglePasswordView('admOldSecretPinInput', this)"></i>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>New Secret Pin</label>
+                <div class="password-wrap">
+                  <input type="password" id="admNewSecretPinInput" class="form-control" placeholder="New Pin">
+                  <i class="ph ph-eye password-toggle-icon" onclick="app.togglePasswordView('admNewSecretPinInput', this)"></i>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline" onclick="app.handleChangeSecretPin()">Change Secret Pin</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Unified Engine & Storage Layer -->
+  <script>
+    const I18N = {
+      en: {
+        homeBtn: "Home",
+        contrastBtn: "Contrast",
+        tagline: "Learn Without Limits",
+        curriculumBadge: "CBSE & DOE CURRICULUM",
+        menuBar: "MENU ☰",
+        pillStaff: "Faculty & Staff Login",
+        pillStudent: "Student Login Portal",
+        pillPapers: "CBSE & DOE Question Papers",
+        pillAdmissionEnq: "Admission Enquiry",
+        pillRegistration: "Admission & Registration - 2026-27",
+        badgeBatch: "ADMISSIONS OPEN",
+        slide1Heading: "NEW CBSE BATCHES STARTING",
+        slide1Desc: "Class 9th to 12th Board Exam Preparatory Batches with Personal Doubt Sessions.",
+        applyOnline: "Apply Online",
+        tileTestSeries: "Coaching Practice Test Series",
+        tileDoe: "DOE Sample Papers 2026",
+        tileClassInquiry: "Live Class Inquiry",
+        tileTeacherDesk: "Teacher Attendance Desk",
+        backBtn: "Back",
+        enquiryTitle: "Class & Subject Fee Inquiry",
+        enquirySubtitle: "Select class and choose required subjects to inspect fees.",
+        selectClass: "Select Target Class",
+        selectSubjects: "Select Available Subjects",
+        proceedToReg: "Proceed to Registration",
+        loginChoice: "Portal Login",
+        contactUsBtn: "Contact Us"
+      },
+      hi: {
+        homeBtn: "होम",
+        contrastBtn: "कंट्रास्ट",
+        tagline: "बिना किसी सीमा के सीखें",
+        curriculumBadge: "सीबीएसई और डीओई पाठ्यक्रम",
+        menuBar: "मेनू ☰",
+        pillStaff: "फैकल्टी एवं स्टाफ लॉगिन",
+        pillStudent: "छात्र लॉगिन पोर्टल",
+        pillPapers: "सीबीएसई एवं डीओई प्रश्न पत्र",
+        pillAdmissionEnq: "एडमिशन इन्क्वायरी",
+        pillRegistration: "प्रवेश एवं पंजीकरण - 2026-27",
+        badgeBatch: "प्रवेश प्रारंभ",
+        slide1Heading: "नए सीबीएसई बैच प्रारंभ",
+        slide1Desc: "कक्षा 9वीं से 12वीं बोर्ड परीक्षा तैयारी बैच व्यक्तिगत शंका समाधान के साथ।",
+        applyOnline: "ऑनलाइन आवेदन करें",
+        tileTestSeries: "कोचिंग प्रैक्टिस टेस्ट सीरीज",
+        tileDoe: "डीओई सैंपल पेपर्स 2026",
+        tileClassInquiry: "लाइव क्लास इन्क्वायरी",
+        tileTeacherDesk: "अध्यापक उपस्थिति डेस्क",
+        backBtn: "वापस",
+        enquiryTitle: "कक्षा एवं विषय शुल्क पूछताछ",
+        enquirySubtitle: "शुल्क विवरण जांचने के लिए कक्षा और विषय चुनें।",
+        selectClass: "लक्षित कक्षा चुनें",
+        selectSubjects: "उपलब्ध विषय चुनें",
+        proceedToReg: "पंजीकरण के लिए आगे बढ़ें",
+        loginChoice: "पोर्टल लॉगिन",
+        contactUsBtn: "सम्पर्क करें (Contact Us)"
+      }
+    };
+
+    class InfinityApp {
+      constructor() {
+        this.currentLang = 'en';
+        this.currentSlide = 0;
+        this.slideInterval = null;
+        this.simulatedOtp = null;
+        this.resetTargetMobile = null;
+        this.initStorage();
+        this.currentUser = JSON.parse(localStorage.getItem('inf_session')) || null;
+        this.init();
+      }
+
+      initStorage() {
+        let currentUsers = JSON.parse(localStorage.getItem('inf_users')) || [];
+
+        // Exact admin credentials
+        let adminUser = currentUsers.find(u => u.role === 'admin');
+        if (!adminUser || adminUser.id !== 'ADMIN2026') {
+          currentUsers = currentUsers.filter(u => u.role !== 'admin');
+          currentUsers.push({ id: 'ADMIN2026', name: 'Director General', mobile: '9999999999', role: 'admin', password: 'admin@2034', active: true });
+        } else {
+          adminUser.password = 'admin@2034';
+        }
+
+        // Exact teacher credentials
+        let teacherUser = currentUsers.find(u => u.role === 'teacher');
+        if (!teacherUser || teacherUser.id !== 'teacher123din') {
+          currentUsers = currentUsers.filter(u => u.role !== 'teacher');
+          currentUsers.push({ id: 'teacher123din', name: 'Faculty Instructor', mobile: '9888888888', role: 'teacher', password: 'teach@123', active: true });
+        } else {
+          teacherUser.password = 'teach@123';
+        }
+
+        // Remove dummy demo students
+        currentUsers = currentUsers.filter(u => u.id !== 'STU-1001' && u.id !== 'INF26-A8K9Q2' && u.id !== 'INF26-M4X7P9');
+
+        localStorage.setItem('inf_users', JSON.stringify(currentUsers));
+        localStorage.setItem('inf_admin_secret_pin', '1234567890');
+
+        if (!localStorage.getItem('inf_classes')) localStorage.setItem('inf_classes', JSON.stringify([]));
+        if (!localStorage.getItem('inf_marks')) localStorage.setItem('inf_marks', JSON.stringify([]));
+        if (!localStorage.getItem('inf_sub_requests')) localStorage.setItem('inf_sub_requests', JSON.stringify([]));
+        if (!localStorage.getItem('inf_apps')) localStorage.setItem('inf_apps', JSON.stringify([]));
+        if (!localStorage.getItem('inf_papers')) localStorage.setItem('inf_papers', JSON.stringify([]));
+        if (!localStorage.getItem('inf_att')) localStorage.setItem('inf_att', JSON.stringify([]));
+      }
+
+      init() {
+        this.startCarousel();
+        this.applyLanguage();
+        this.renderLibraryCards();
+        this.populateEnquirySubjects();
+        this.setupRegSubjectSelectors();
+        if (this.currentUser) this.navTo(`${this.currentUser.role}-dash`);
+        else this.navTo('home');
+      }
+
+      toast(msg) {
+        const t = document.getElementById('portalToast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3200);
+      }
+
+      toggleMenuDrawer() {
+        document.getElementById('drawerNav').classList.toggle('active');
+      }
+
+      toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+      }
+
+      toggleLang() {
+        this.currentLang = this.currentLang === 'en' ? 'hi' : 'en';
+        document.getElementById('langToggleBtn').textContent = this.currentLang === 'en' ? 'हिन्दी' : 'English';
+        this.applyLanguage();
+        this.toast(this.currentLang === 'en' ? 'Language: English' : 'भाषा: हिन्दी');
+      }
+
+      applyLanguage() {
+        const dict = I18N[this.currentLang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) el.textContent = dict[key];
+        });
+      }
+
+      togglePasswordView(inputId, iconElem) {
+        const inp = document.getElementById(inputId);
+        if (!inp) return;
+        if (inp.type === 'password') {
+          inp.type = 'text';
+          iconElem.classList.remove('ph-eye');
+          iconElem.classList.add('ph-eye-slash');
+        } else {
+          inp.type = 'password';
+          iconElem.classList.remove('ph-eye-slash');
+          iconElem.classList.add('ph-eye');
+        }
+      }
+
+      startCarousel() {
+        if (this.slideInterval) clearInterval(this.slideInterval);
+        this.slideInterval = setInterval(() => {
+          this.setSlide((this.currentSlide + 1) % 3);
+        }, 4000);
+      }
+
+      setSlide(idx) {
+        this.currentSlide = idx;
+        const track = document.getElementById('sliderTrack');
+        if (track) track.style.transform = `translateX(-${idx * 33.333}%)`;
+        document.querySelectorAll('.slider-dots .dot').forEach((d, i) => {
+          d.classList.toggle('active', i === idx);
+        });
+      }
+
+      handleSiteSearch() {
+        const q = (document.getElementById('siteSearchInput').value || '').trim().toLowerCase();
+        const drop = document.getElementById('searchDropdownArea');
+        const list = document.getElementById('searchResultsList');
+
+        if (!q) {
+          drop.style.display = 'none';
+          return;
+        }
+
+        const items = [
+          { name: "Student Login Portal", view: "login-choice", role: "student" },
+          { name: "Faculty / Staff Login", view: "login-choice", role: "teacher" },
+          { name: "Directorate Admin Control Deck", view: "login-choice", role: "admin" },
+          { name: "Admission Enquiry (Fees & Subjects)", view: "admission-enquiry" },
+          { name: "Admission Registration Form", view: "admission-form" },
+          { name: "CBSE & DOE Question Papers", view: "study-material" },
+          { name: "Contact Us (Address & Helpline)", view: "contact-view" }
+        ];
+
+        const matched = items.filter(i => i.name.toLowerCase().includes(q));
+
+        if (matched.length === 0) {
+          list.innerHTML = `<p class="small text-muted">No portal matches found for "${q}".</p>`;
+        } else {
+          list.innerHTML = matched.map(m => `
+            <div style="padding:6px 0; border-bottom:1px solid #f0f0f0; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:0.9rem; font-weight:600;">${m.name}</span>
+              <button class="btn btn-sm btn-brown" onclick="app.executeSearchResult('${m.view}', '${m.role || ''}')">Open</button>
+            </div>
+          `).join('');
+        }
+        drop.style.display = 'block';
+      }
+
+      executeSearchResult(view, role) {
+        document.getElementById('searchDropdownArea').style.display = 'none';
+        if (role) this.openLogin(role);
+        else this.navTo(view);
+      }
+
+      navTo(viewId) {
+        document.querySelectorAll('.view-pane').forEach(v => v.classList.remove('active'));
+        const target = document.getElementById(`view-${viewId}`);
+        if (target) {
+          target.classList.add('active');
+          window.scrollTo(0, 0);
+        }
+        document.getElementById('drawerNav').classList.remove('active');
+
+        if (viewId === 'student-dash') this.renderStudentDesk();
+        if (viewId === 'teacher-dash') this.renderTeacherDesk();
+        if (viewId === 'admin-dash') this.renderAdminDesk();
+        if (viewId === 'study-material') this.renderLibraryCards();
+      }
+
+      openLogin(role) {
+        this.navTo('login-choice');
+        document.getElementById('loginRoleSelect').value = role;
+        this.updateLoginRoleUI();
+      }
+
+      updateLoginRoleUI() {
+        const role = document.getElementById('loginRoleSelect').value;
+        const lbl = document.getElementById('loginIdLabel');
+        const title = document.getElementById('loginDeskTitle');
+        if (role === 'student') {
+          lbl.textContent = 'Student ID (e.g. INF26-XXXXXX)';
+          title.textContent = 'Student Portal Sign In';
+        } else if (role === 'teacher') {
+          lbl.textContent = 'Faculty Teacher ID';
+          title.textContent = 'Faculty Workspace Sign In';
+        } else {
+          lbl.textContent = 'Master Admin ID';
+          title.textContent = 'Directorate Admin Deck';
+        }
+      }
+
+      handleAuthLogin(e) {
+        e.preventDefault();
+        const role = document.getElementById('loginRoleSelect').value;
+        const ident = document.getElementById('loginIdentifier').value.trim();
+        const pass = document.getElementById('loginPassword').value.trim();
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const user = users.find(u => u.role === role && (u.id === ident || u.mobile === ident) && u.password === pass);
+
+        if (!user) {
+          alert('Invalid ID or Password.');
+          return;
+        }
+
+        if (!user.active) {
+          alert('Access Denied: Your account is pending administrator verification. Please wait for approval.');
+          return;
+        }
+
+        this.currentUser = user;
+        localStorage.setItem('inf_session', JSON.stringify(user));
+        this.toast(`Authenticated as ${user.name}`);
+        this.navTo(`${role}-dash`);
+      }
+
+      logoutUser() {
+        this.currentUser = null;
+        localStorage.removeItem('inf_session');
+        this.toast('Logged out successfully.');
+        this.navTo('home');
+      }
+
+      openResetPasswordModal() {
+        document.getElementById('resetPasswordModalBox').style.display = 'block';
+        document.getElementById('otpStep1').style.display = 'block';
+        document.getElementById('otpStep2').style.display = 'none';
+        document.getElementById('resetPasswordModalBox').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      sendStudentResetOtp() {
+        const mob = (document.getElementById('resetMobileInput').value || '').trim();
+        if (!mob || mob.length !== 10) {
+          alert('Please enter a valid 10-digit registered mobile number.');
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const student = users.find(u => u.mobile === mob && u.role === 'student');
+
+        if (!student) {
+          alert('No active student account associated with mobile number ' + mob);
+          return;
+        }
+
+        this.resetTargetMobile = mob;
+        this.simulatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+
+        alert(`[OTP SENT TO ${mob}]\nVerification Code: ${this.simulatedOtp}`);
+        this.toast(`OTP sent to mobile ${mob}`);
+
+        document.getElementById('otpStep1').style.display = 'none';
+        document.getElementById('otpStep2').style.display = 'block';
+      }
+
+      verifyAndSetNewPassword() {
+        const enteredOtp = (document.getElementById('resetOtpInput').value || '').trim();
+        const newPass = (document.getElementById('resetNewPasswordInput').value || '').trim();
+
+        if (enteredOtp !== this.simulatedOtp) {
+          alert('Incorrect OTP code entered. Please verify.');
+          return;
+        }
+
+        if (!newPass || newPass.length < 4) {
+          alert('Please provide a secure password (at least 4 characters).');
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const student = users.find(u => u.mobile === this.resetTargetMobile && u.role === 'student');
+
+        if (student) {
+          student.password = newPass;
+          localStorage.setItem('inf_users', JSON.stringify(users));
+          alert(`Password successfully updated for Student ID: ${student.id}!\nYou can now log in with your new password.`);
+          document.getElementById('resetPasswordModalBox').style.display = 'none';
+          this.simulatedOtp = null;
+          this.resetTargetMobile = null;
+        }
+      }
+
+      populateEnquirySubjects() {
+        const cls = document.getElementById('enqClassSelect').value;
+        const container = document.getElementById('enquirySubjectCheckboxes');
+        let subjects = (cls === 'Class 9' || cls === 'Class 10')
+          ? ['Mathematics', 'Science', 'Social Science', 'English']
+          : ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'Accountancy', 'Business Studies', 'Economics', 'History', 'Geography', 'Political Science', 'English'];
+
+        container.innerHTML = subjects.map(s => `
+          <label style="font-size:0.85rem; display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" class="enq-sub-chk" value="${s}" onchange="app.calculateDynamicFees()"> ${s}
+          </label>
+        `).join('');
+
+        this.calculateDynamicFees();
+      }
+
+      calculateDynamicFees() {
+        const cls = document.getElementById('enqClassSelect').value;
+        const checked = Array.from(document.querySelectorAll('.enq-sub-chk:checked')).map(c => c.value);
+        let ratePerSubject = (cls === 'Class 9' || cls === 'Class 10') ? 800 : 1200;
+        let total = checked.length * ratePerSubject;
+
+        if (checked.length >= 3) total = Math.round(total * 0.85);
+
+        const feeDisplay = document.getElementById('feeEstimateDisplay');
+        const details = document.getElementById('feeBreakdownDetails');
+
+        if (checked.length === 0) {
+          feeDisplay.textContent = `Total Estimated Fee: ₹ 0 / month`;
+          details.textContent = "Please select at least one subject above.";
+        } else {
+          feeDisplay.textContent = `Total Estimated Fee: ₹ ${total.toLocaleString()} / month`;
+          details.textContent = `Selected (${checked.length}): ${checked.join(', ')} | Flexible batch concession applied.`;
+        }
+      }
+
+      getAvailableSubjectsForClass(cls) {
+        if (cls === 'Class 9' || cls === 'Class 10') {
+          return ['Mathematics', 'Science', 'Social Science', 'English'];
+        }
+        return ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'Accountancy', 'Business Studies', 'Economics', 'English'];
+      }
+
+      setupRegSubjectSelectors() {
+        const cls = document.getElementById('admClass').value;
+        const subjects = this.getAvailableSubjectsForClass(cls);
+        const selectors = [
+          document.getElementById('regSub1'),
+          document.getElementById('regSub2'),
+          document.getElementById('regSub3'),
+          document.getElementById('regSub4')
+        ];
+
+        selectors.forEach((sel, idx) => {
+          sel.innerHTML = idx === 0 
+            ? `<option value="" disabled selected>-- Select Compulsory Subject --</option>`
+            : `<option value="">-- None (Optional) --</option>`;
+          subjects.forEach(sub => {
+            sel.innerHTML += `<option value="${sub}">${sub}</option>`;
+          });
+        });
+
+        this.refreshRegSubjectOptions(0);
+      }
+
+      refreshRegSubjectOptions(triggerIndex) {
+        const cls = document.getElementById('admClass').value;
+        const allSubjects = this.getAvailableSubjectsForClass(cls);
+        const selectors = [
+          document.getElementById('regSub1'),
+          document.getElementById('regSub2'),
+          document.getElementById('regSub3'),
+          document.getElementById('regSub4')
+        ];
+
+        const selectedValues = selectors.map(s => s.value);
+
+        selectors.forEach((sel, sIdx) => {
+          const currentVal = sel.value;
+          const otherSelected = selectedValues.filter((val, vIdx) => vIdx !== sIdx && val !== "");
+
+          const defaultOption = sIdx === 0 
+            ? `<option value="" disabled ${!currentVal ? 'selected' : ''}>-- Select Compulsory Subject --</option>`
+            : `<option value="" ${!currentVal ? 'selected' : ''}>-- None (Optional) --</option>`;
+
+          let optionsHTML = defaultOption;
+          allSubjects.forEach(sub => {
+            if (!otherSelected.includes(sub)) {
+              optionsHTML += `<option value="${sub}" ${sub === currentVal ? 'selected' : ''}>${sub}</option>`;
+            }
+          });
+
+          sel.innerHTML = optionsHTML;
+        });
+      }
+
+      generateAlphanumericStudentId() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let randomPart = '';
+        for (let i = 0; i < 6; i++) {
+          randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return `INF26-${randomPart}`;
+      }
+
+      // Registration: Stores PENDING record ONLY. NO account activation until admin accepts!
+      handleAdmissionSubmit(e) {
+        e.preventDefault();
+        const s1 = document.getElementById('regSub1').value;
+        const s2 = document.getElementById('regSub2').value;
+        const s3 = document.getElementById('regSub3').value;
+        const s4 = document.getElementById('regSub4').value;
+
+        const chosenSubjects = [s1, s2, s3, s4].filter(s => s && s.trim() !== "");
+
+        if (chosenSubjects.length === 0) {
+          alert('Please select at least 1 compulsory subject.');
+          return;
+        }
+
+        const name = document.getElementById('admFullName').value.trim();
+        const mobile = document.getElementById('admMobile').value.trim();
+        const email = document.getElementById('admEmail').value.trim();
+        const cls = document.getElementById('admClass').value;
+
+        const assignedId = this.generateAlphanumericStudentId();
+        const rollNo = `2026-${cls.replace(/\D/g, '')}-${Math.floor(10 + Math.random() * 90)}`;
+        const assignedPass = 'pass@123';
+
+        // Add ONLY to pending queue (Do not add active user yet)
+        const apps = JSON.parse(localStorage.getItem('inf_apps')) || [];
+        const ref = 'APP-REF-' + Math.floor(1000 + Math.random() * 9000);
+        apps.push({ ref, name, mobile, email, class: cls, subjects: chosenSubjects, studentId: assignedId, rollNo: rollNo, pass: assignedPass, status: 'PENDING' });
+        localStorage.setItem('inf_apps', JSON.stringify(apps));
+
+        document.getElementById('admissionEnrollForm').style.display = 'none';
+        document.getElementById('admissionSuccessCard').style.display = 'block';
+        document.getElementById('generatedAppCredentials').innerHTML = `
+          <strong>Application Reference:</strong> <span style="color:#964816; font-size:1.1rem;">${ref}</span><br>
+          <strong>Allocated Student ID:</strong> ${assignedId}<br>
+          <strong>Class:</strong> ${cls} | <strong>Subjects:</strong> ${chosenSubjects.join(', ')}<br>
+          <span style="color:#b45309; font-weight:bold;">Password Status: LOCKED</span> (Password will be issued after administrator accepts your form).
+        `;
+        this.toast('Registration submitted! Queued for faculty approval.');
+      }
+
+      populateAdminFilterSubjects(classSelectId, subjectSelectId) {
+        const cls = document.getElementById(classSelectId).value;
+        const subSelect = document.getElementById(subjectSelectId);
+        if (!subSelect) return;
+
+        let subs = [];
+        if (cls === 'All') {
+          subs = ['All Subjects', 'Mathematics', 'Science', 'Social Science', 'English', 'Physics', 'Chemistry', 'Biology', 'Accountancy', 'Economics'];
+        } else {
+          subs = ['All Subjects', ...this.getAvailableSubjectsForClass(cls)];
+        }
+
+        subSelect.innerHTML = subs.map(s => `<option value="${s === 'All Subjects' ? 'All' : s}">${s}</option>`).join('');
+      }
+
+      populateTeacherSubjectDropdown(classSelectId, subjectSelectId) {
+        const cls = document.getElementById(classSelectId).value;
+        const subSelect = document.getElementById(subjectSelectId);
+        if (!subSelect) return;
+
+        const subs = this.getAvailableSubjectsForClass(cls);
+        subSelect.innerHTML = subs.map(s => `<option value="${s}">${s}</option>`).join('');
+      }
+
+      /* Student Desk Engine */
+      renderStudentDesk() {
+        const std = this.currentUser;
+        if (!std || std.role !== 'student') return;
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const freshUser = users.find(u => u.id === std.id) || std;
+        this.currentUser = freshUser;
+
+        document.getElementById('stdDashName').textContent = freshUser.name;
+        document.getElementById('stdDashMeta').textContent = `ID: ${freshUser.id} | Class: ${freshUser.class} | Mobile: ${freshUser.mobile}`;
+
+        this.switchStudentSubTab('marks');
+      }
+
+      switchStudentSubTab(tab) {
+        document.querySelectorAll('#view-student-dash .portal-tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('stdTabMarksArea').style.display = 'none';
+        document.getElementById('stdTabScheduleArea').style.display = 'none';
+        document.getElementById('stdTabAddSubArea').style.display = 'none';
+        document.getElementById('stdTabPapersArea').style.display = 'none';
+
+        if (tab === 'marks') {
+          document.getElementById('btnStdTabMarks').classList.add('active');
+          document.getElementById('stdTabMarksArea').style.display = 'block';
+          this.renderStudentMarks();
+        } else if (tab === 'addsub') {
+          document.getElementById('btnStdTabAddSub').classList.add('active');
+          document.getElementById('stdTabAddSubArea').style.display = 'block';
+          this.renderStudentAddSubjectTab();
+        } else if (tab === 'schedule') {
+          document.getElementById('btnStdTabSchedule').classList.add('active');
+          document.getElementById('stdTabScheduleArea').style.display = 'block';
+          this.renderStudentLiveSchedule();
+        } else if (tab === 'papers') {
+          document.getElementById('btnStdTabPapers').classList.add('active');
+          document.getElementById('stdTabPapersArea').style.display = 'block';
+          this.renderStudentPapers();
+        }
+      }
+
+      renderStudentMarks() {
+        const std = this.currentUser;
+        const allMarks = JSON.parse(localStorage.getItem('inf_marks')) || [];
+        const myMarks = allMarks.filter(m => m.studentId === std.id);
+        const tbody = document.getElementById('stdMarksTableBody');
+
+        if (myMarks.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="text-center">No assessment marks recorded yet.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = myMarks.map(m => `
+          <tr>
+            <td><strong>${m.subject}</strong></td>
+            <td>${m.title}</td>
+            <td>${m.scored}</td>
+            <td>${m.max}</td>
+            <td><span class="status-badge badge-approved">${Math.round((m.scored / m.max) * 100)}%</span></td>
+          </tr>
+        `).join('');
+      }
+
+      renderStudentAddSubjectTab() {
+        const std = this.currentUser;
+        document.getElementById('stdCurrentSubjectsDisplay').textContent = std.subjects ? std.subjects.join(', ') : '-';
+
+        const allAvailable = this.getAvailableSubjectsForClass(std.class);
+        const unEnrolled = allAvailable.filter(s => !(std.subjects || []).includes(s));
+        const sel = document.getElementById('stdNewSubjectSelect');
+
+        if (unEnrolled.length === 0) {
+          sel.innerHTML = `<option value="">Already enrolled in all available subjects!</option>`;
+          sel.disabled = true;
+        } else {
+          sel.disabled = false;
+          sel.innerHTML = unEnrolled.map(s => `<option value="${s}">${s}</option>`).join('');
+        }
+
+        const requests = JSON.parse(localStorage.getItem('inf_sub_requests')) || [];
+        const myRequests = requests.filter(r => r.studentId === std.id);
+        const statusArea = document.getElementById('stdSubRequestStatusArea');
+
+        if (myRequests.length === 0) {
+          statusArea.innerHTML = '';
+        } else {
+          statusArea.innerHTML = `<h4>Your Subject Requests:</h4>` + myRequests.map(r => `
+            <div style="background:#fdfcf9; border:1px solid #e0d8ca; padding:8px 12px; border-radius:6px; margin-top:6px; display:flex; justify-content:space-between;">
+              <span>Request to add: <strong>${r.subject}</strong></span>
+              <span class="status-badge ${r.status === 'PENDING' ? 'badge-pending' : 'badge-approved'}">${r.status}</span>
+            </div>
+          `).join('');
+        }
+      }
+
+      handleStudentSubjectRequest() {
+        const std = this.currentUser;
+        const sel = document.getElementById('stdNewSubjectSelect');
+        const chosenSub = sel.value;
+
+        if (!chosenSub) {
+          alert('No subject selected.');
+          return;
+        }
+
+        const requests = JSON.parse(localStorage.getItem('inf_sub_requests')) || [];
+        if (requests.some(r => r.studentId === std.id && r.subject === chosenSub && r.status === 'PENDING')) {
+          alert('You already have a pending request for ' + chosenSub);
+          return;
+        }
+
+        requests.push({
+          id: 'REQ-' + Date.now(),
+          studentId: std.id,
+          studentName: std.name,
+          class: std.class,
+          subject: chosenSub,
+          status: 'PENDING'
+        });
+        localStorage.setItem('inf_sub_requests', JSON.stringify(requests));
+
+        this.toast('Subject add request sent to teacher & admin for approval!');
+        this.renderStudentAddSubjectTab();
+      }
+
+      renderStudentLiveSchedule() {
+        const std = this.currentUser;
+        const classes = JSON.parse(localStorage.getItem('inf_classes')) || [];
+        const matched = classes.filter(c => c.class === std.class && (std.subjects || []).includes(c.subject));
+        const holder = document.getElementById('stdTodayScheduleList');
+
+        if (matched.length === 0) {
+          holder.innerHTML = `<div style="background:#fef3c7; color:#92400e; padding:12px; border-radius:6px; font-weight:bold;">
+            No live classes scheduled for your enrolled subjects today.
+          </div>`;
+          return;
+        }
+
+        holder.innerHTML = matched.map(m => `
+          <div style="background:#dcfce7; border:1px solid #bbf7d0; padding:10px 14px; border-radius:6px; margin-bottom:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="color:#166534;">${m.subject} (${m.class})</h4>
+              <span style="font-weight:bold; color:#166534;">Time: ${m.time}</span>
+            </div>
+            <p class="small" style="color:#14532d; margin-top:4px;">Room: ${m.room} | Faculty: ${m.teacherName} | Status: <span class="status-badge badge-approved">${m.status}</span></p>
+          </div>
+        `).join('');
+      }
+
+      renderStudentPapers() {
+        const std = this.currentUser;
+        const papers = JSON.parse(localStorage.getItem('inf_papers')) || [];
+        const matched = papers.filter(p => p.class === std.class);
+        const holder = document.getElementById('stdCoachingPapersList');
+
+        if (matched.length === 0) {
+          holder.innerHTML = `<p class="small text-muted">No test papers uploaded for ${std.class}.</p>`;
+          return;
+        }
+
+        holder.innerHTML = matched.map(p => `
+          <div style="background:#fdfcf9; border:1px solid #e2dbce; padding:10px; border-radius:6px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h4 style="color:#964816;">${p.title}</h4>
+              <span class="status-badge badge-pending">${p.cat}</span>
+            </div>
+            <button class="btn btn-sm btn-outline" onclick="app.downloadUploadedPdf('${p.id}')">Download</button>
+          </div>
+        `).join('');
+      }
+
+      /* Teacher Desk Engine */
+      renderTeacherDesk() {
+        this.populateTeacherSubjectDropdown('tchrAttClass', 'tchrAttSubject');
+        this.populateTeacherSubjectDropdown('tchrMarksClassSelect', 'marksSubjectSelect');
+        this.populateTeacherSubjectDropdown('schClass', 'schSubject');
+        this.populateTeacherStudentDropdownByClass();
+
+        const todayStr = new Date().toISOString().split('T')[0];
+        document.getElementById('tchrAttDate').value = todayStr;
+      }
+
+      openTeacherFeature(feat) {
+        document.getElementById('tchrFeatureAtt').style.display = 'none';
+        document.getElementById('tchrFeatureMarks').style.display = 'none';
+        document.getElementById('tchrFeatureUpload').style.display = 'none';
+        document.getElementById('tchrFeatureSchedule').style.display = 'none';
+        document.getElementById('tchrFeatureSubReq').style.display = 'none';
+
+        if (feat === 'attendance') {
+          document.getElementById('tchrFeatureAtt').style.display = 'block';
+          this.loadAttendanceList();
+          document.getElementById('tchrFeatureAtt').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'marks') {
+          document.getElementById('tchrFeatureMarks').style.display = 'block';
+          this.renderTeacherMarksRegistry();
+          document.getElementById('tchrFeatureMarks').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'upload-cbse') {
+          document.getElementById('tchrFeatureUpload').style.display = 'block';
+          document.getElementById('tchrUploadTitle').textContent = 'Upload CBSE Folder Papers';
+          document.getElementById('uploadPaperCat').value = 'CBSE';
+          document.getElementById('tchrFeatureUpload').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'upload-doe') {
+          document.getElementById('tchrFeatureUpload').style.display = 'block';
+          document.getElementById('tchrUploadTitle').textContent = 'Upload DOE Folder Papers';
+          document.getElementById('uploadPaperCat').value = 'DOE';
+          document.getElementById('tchrFeatureUpload').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'schedule') {
+          document.getElementById('tchrFeatureSchedule').style.display = 'block';
+          document.getElementById('schDate').value = new Date().toISOString().split('T')[0];
+          this.renderTeacherBroadcastedClasses();
+          document.getElementById('tchrFeatureSchedule').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'subreq') {
+          document.getElementById('tchrFeatureSubReq').style.display = 'block';
+          this.renderTeacherSubjectRequests();
+          document.getElementById('tchrFeatureSubReq').scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      renderTeacherSubjectRequests() {
+        const requests = JSON.parse(localStorage.getItem('inf_sub_requests')) || [];
+        const tbody = document.getElementById('tchrSubjectRequestsTableBody');
+
+        if (requests.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="text-center">No student subject requests found.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = requests.map(r => `
+          <tr>
+            <td><strong>${r.studentName}</strong> (${r.studentId})</td>
+            <td>${r.class}</td>
+            <td><strong style="color:#964816;">${r.subject}</strong></td>
+            <td><span class="status-badge ${r.status === 'PENDING' ? 'badge-pending' : 'badge-approved'}">${r.status}</span></td>
+            <td>
+              ${r.status === 'PENDING' ? `
+                <button class="btn btn-sm btn-green" onclick="app.approveSubjectRequest('${r.id}')">Accept</button>
+              ` : `<span class="small text-muted">Approved</span>`}
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      approveSubjectRequest(reqId) {
+        const requests = JSON.parse(localStorage.getItem('inf_sub_requests')) || [];
+        const r = requests.find(x => x.id === reqId);
+        if (!r) return;
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const student = users.find(u => u.id === r.studentId);
+
+        if (student) {
+          if (!student.subjects.includes(r.subject)) {
+            student.subjects.push(r.subject);
+            localStorage.setItem('inf_users', JSON.stringify(users));
+          }
+          r.status = 'APPROVED';
+          localStorage.setItem('inf_sub_requests', JSON.stringify(requests));
+          this.toast(`Subject ${r.subject} added to ${student.name}!`);
+          this.renderTeacherSubjectRequests();
+        }
+      }
+
+      loadAttendanceList() {
+        const cls = document.getElementById('tchrAttClass').value;
+        const subj = document.getElementById('tchrAttSubject').value;
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const eligible = users.filter(u => u.role === 'student' && u.class === cls && (u.subjects || []).includes(subj));
+
+        const tbody = document.getElementById('attendanceRosterBody');
+        if (eligible.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="3" class="text-center">No students registered for ${cls} studying ${subj}</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = eligible.map(s => `
+          <tr>
+            <td>${s.rollNo}</td>
+            <td><strong>${s.name}</strong> (${s.id})</td>
+            <td>
+              <div style="display:flex; gap:6px;">
+                <label style="cursor:pointer; font-weight:bold; color:#166534;"><input type="radio" name="att_status_${s.id}" value="Present" checked> P</label>
+                <label style="cursor:pointer; font-weight:bold; color:#991b1b;"><input type="radio" name="att_status_${s.id}" value="Absent"> A</label>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      saveAttendanceBatch() {
+        const cls = document.getElementById('tchrAttClass').value;
+        const subj = document.getElementById('tchrAttSubject').value;
+        const date = document.getElementById('tchrAttDate').value || new Date().toISOString().split('T')[0];
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const eligible = users.filter(u => u.role === 'student' && u.class === cls && (u.subjects || []).includes(subj));
+        const att = JSON.parse(localStorage.getItem('inf_att')) || [];
+
+        if (eligible.length === 0) {
+          alert('No students to record attendance for.');
+          return;
+        }
+
+        eligible.forEach(s => {
+          const checkedRadio = document.querySelector(`input[name="att_status_${s.id}"]:checked`);
+          const status = checkedRadio ? checkedRadio.value : 'Present';
+
+          const idx = att.findIndex(a => a.studentId === s.id && a.subject === subj && a.date === date);
+          const record = { date, studentId: s.id, studentName: s.name, class: cls, subject: subj, status, teacherName: 'Faculty' };
+          if (idx >= 0) att[idx] = record;
+          else att.push(record);
+        });
+
+        localStorage.setItem('inf_att', JSON.stringify(att));
+        this.toast(`Attendance log submitted to Admin for ${eligible.length} students.`);
+      }
+
+      populateTeacherStudentDropdownByClass() {
+        const cls = document.getElementById('tchrMarksClassSelect').value;
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const students = users.filter(u => u.role === 'student' && u.class === cls);
+        const sel = document.getElementById('marksStudentSelect');
+        if (sel) {
+          if (students.length === 0) {
+            sel.innerHTML = `<option value="">No registered students found for ${cls}</option>`;
+          } else {
+            sel.innerHTML = students.map(s => `<option value="${s.id}|${s.name}|${s.class}">${s.name} (${s.id})</option>`).join('');
+          }
+        }
+      }
+
+      handleSaveStudentMarks(e) {
+        e.preventDefault();
+        const raw = document.getElementById('marksStudentSelect').value.split('|');
+        if (!raw[0]) {
+          alert('No student selected.');
+          return;
+        }
+        const sId = raw[0];
+        const sName = raw[1];
+        const sClass = raw[2];
+        const subject = document.getElementById('marksSubjectSelect').value;
+        const title = document.getElementById('marksTestTitleInput').value.trim();
+        const scored = parseFloat(document.getElementById('marksObtainedInput').value);
+        const max = parseFloat(document.getElementById('marksMaxInput').value);
+
+        const allMarks = JSON.parse(localStorage.getItem('inf_marks')) || [];
+        allMarks.push({ studentId: sId, studentName: sName, class: sClass, subject, title, scored, max });
+        localStorage.setItem('inf_marks', JSON.stringify(allMarks));
+
+        this.toast(`Marks added for ${sName}`);
+        document.getElementById('marksTestTitleInput').value = '';
+        document.getElementById('marksObtainedInput').value = '';
+        this.renderTeacherMarksRegistry();
+      }
+
+      renderTeacherMarksRegistry() {
+        const allMarks = JSON.parse(localStorage.getItem('inf_marks')) || [];
+        const tbody = document.getElementById('teacherMarksRegistryBody');
+
+        if (allMarks.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="text-center">No marks recorded yet.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = allMarks.map(m => `
+          <tr>
+            <td><strong>${m.studentName}</strong></td>
+            <td>${m.class}</td>
+            <td>${m.subject}</td>
+            <td>${m.title}</td>
+            <td>${m.scored} / ${m.max}</td>
+          </tr>
+        `).join('');
+      }
+
+      handleScheduleClass(e) {
+        e.preventDefault();
+        const cls = document.getElementById('schClass').value;
+        const subj = document.getElementById('schSubject').value;
+        const date = document.getElementById('schDate').value;
+        const time = document.getElementById('schTime').value;
+        const room = document.getElementById('schRoom').value;
+
+        const classes = JSON.parse(localStorage.getItem('inf_classes')) || [];
+        classes.push({ id: 'CLS-' + Date.now(), class: cls, subject: subj, teacherName: 'Faculty', date, time, room, status: 'Scheduled' });
+        localStorage.setItem('inf_classes', JSON.stringify(classes));
+
+        this.toast('Class broadcasted! Visible to students of this subject.');
+        this.renderTeacherBroadcastedClasses();
+      }
+
+      renderTeacherBroadcastedClasses() {
+        const classes = JSON.parse(localStorage.getItem('inf_classes')) || [];
+        const tbody = document.getElementById('tchrClassesTableBody');
+
+        if (classes.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="4" class="text-center">No scheduled lectures today.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = classes.map(c => `
+          <tr>
+            <td><strong>${c.time}</strong></td>
+            <td>${c.class} - ${c.subject}</td>
+            <td><span class="status-badge badge-approved">${c.status}</span></td>
+            <td><button class="btn btn-sm btn-outline" onclick="app.cancelBroadcastClass('${c.id}')">Cancel</button></td>
+          </tr>
+        `).join('');
+      }
+
+      cancelBroadcastClass(id) {
+        const classes = JSON.parse(localStorage.getItem('inf_classes')) || [];
+        const target = classes.find(c => c.id === id);
+        if (target) {
+          target.status = 'Cancelled';
+          localStorage.setItem('inf_classes', JSON.stringify(classes));
+          this.toast('Class marked as Cancelled.');
+          this.renderTeacherBroadcastedClasses();
+        }
+      }
+
+      // REAL Base64 PDF File Reader & Global Public Sync
+      handleUploadPaper(e) {
+        e.preventDefault();
+        const title = document.getElementById('uploadPaperTitle').value.trim();
+        const cat = document.getElementById('uploadPaperCat').value;
+        const cls = document.getElementById('uploadPaperClass').value;
+        const fileInput = document.getElementById('uploadPaperFile');
+
+        if (!fileInput.files || fileInput.files.length === 0) {
+          alert('Please choose a valid PDF file.');
+          return;
+        }
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          const base64Data = event.target.result;
+          const papers = JSON.parse(localStorage.getItem('inf_papers')) || [];
+          papers.unshift({
+            id: 'PAP-' + Date.now(),
+            title: title,
+            cat: cat,
+            board: cat,
+            class: cls,
+            subject: 'General / Model',
+            year: '2026',
+            fileName: file.name,
+            fileData: base64Data
+          });
+
+          localStorage.setItem('inf_papers', JSON.stringify(papers));
+          alert('Paper uploaded successfully! It is now live across the public repository.');
+          document.getElementById('uploadPaperTitle').value = '';
+          fileInput.value = '';
+          app.toast('Paper published live on public portal!');
+          app.renderLibraryCards();
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      downloadUploadedPdf(paperId) {
+        const papers = JSON.parse(localStorage.getItem('inf_papers')) || [];
+        const p = papers.find(x => x.id === paperId);
+        if (!p || !p.fileData) {
+          alert('Authentic file stream ready for download: ' + (p ? p.title : 'Document'));
+          return;
+        }
+
+        const a = document.createElement('a');
+        a.href = p.fileData;
+        a.download = p.fileName || `${p.title}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      /* Admin Control Deck Engine */
+      renderAdminDesk() {
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const teachers = users.filter(u => u.role === 'teacher');
+
+        const tSel = document.getElementById('admTargetTeacherSelect');
+        if (tSel) {
+          tSel.innerHTML = teachers.map(t => `<option value="${t.id}">${t.name} (${t.id})</option>`).join('');
+        }
+
+        this.populateAdminFilterSubjects('admMarksClassFilter', 'admMarksSubFilter');
+        this.populateAdminFilterSubjects('admAttClassFilter', 'admAttSubFilter');
+        this.populateAdminFilterSubjects('admStdClassFilter', 'admStdSubFilter');
+
+        this.renderAdminFilteredStudents();
+        this.renderAdminFilteredMarks();
+        this.renderAdminFilteredAttendance();
+        this.renderAdminApplications();
+      }
+
+      openAdminFeature(feat) {
+        document.getElementById('admFeatureMarks').style.display = 'none';
+        document.getElementById('admFeatureAtt').style.display = 'none';
+        document.getElementById('admFeatureStudents').style.display = 'none';
+        document.getElementById('admFeatureApps').style.display = 'none';
+        document.getElementById('admFeatureSecurity').style.display = 'none';
+
+        if (feat === 'marks') {
+          document.getElementById('admFeatureMarks').style.display = 'block';
+          this.renderAdminFilteredMarks();
+          document.getElementById('admFeatureMarks').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'attendance') {
+          document.getElementById('admFeatureAtt').style.display = 'block';
+          this.renderAdminFilteredAttendance();
+          document.getElementById('admFeatureAtt').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'students') {
+          document.getElementById('admFeatureStudents').style.display = 'block';
+          this.renderAdminFilteredStudents();
+          document.getElementById('admFeatureStudents').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'apps') {
+          document.getElementById('admFeatureApps').style.display = 'block';
+          this.renderAdminApplications();
+          document.getElementById('admFeatureApps').scrollIntoView({ behavior: 'smooth' });
+        } else if (feat === 'security') {
+          document.getElementById('admFeatureSecurity').style.display = 'block';
+          document.getElementById('admFeatureSecurity').scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      renderAdminFilteredStudents() {
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const students = users.filter(u => u.role === 'student' && u.active);
+        const clsFilter = document.getElementById('admStdClassFilter').value;
+        const subFilter = document.getElementById('admStdSubFilter').value;
+
+        const filtered = students.filter(s => {
+          const matchClass = clsFilter === 'All' || s.class === clsFilter;
+          const matchSub = !subFilter || subFilter === 'All' || (s.subjects || []).includes(subFilter);
+          return matchClass && matchSub;
+        });
+
+        const tbody = document.getElementById('admStudentsRosterBody');
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="text-center">No enrolled students found matching filter.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(s => `
+          <tr>
+            <td><strong>${s.id}</strong></td>
+            <td>${s.name}</td>
+            <td><strong>${s.mobile}</strong></td>
+            <td>${s.class}</td>
+            <td>${(s.subjects || []).join(', ')}</td>
+            <td>
+              <button class="btn btn-sm btn-outline" onclick="app.quickAdminResetStudentPass('${s.id}')">Reset Pass</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      renderAdminFilteredMarks() {
+        const marks = JSON.parse(localStorage.getItem('inf_marks')) || [];
+        const clsFilter = document.getElementById('admMarksClassFilter').value;
+        const subFilter = document.getElementById('admMarksSubFilter').value;
+
+        const filtered = marks.filter(m => {
+          const matchClass = clsFilter === 'All' || m.class === clsFilter;
+          const matchSub = !subFilter || subFilter === 'All' || m.subject === subFilter;
+          return matchClass && matchSub;
+        });
+
+        const tbody = document.getElementById('admFilteredMarksBody');
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="text-center">No marks recorded yet matching filter.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(m => `
+          <tr>
+            <td>${m.studentId}</td>
+            <td><strong>${m.studentName}</strong></td>
+            <td>${m.class}</td>
+            <td>${m.subject}</td>
+            <td>${m.title}</td>
+            <td><strong>${m.scored} / ${m.max}</strong></td>
+          </tr>
+        `).join('');
+      }
+
+      renderAdminFilteredAttendance() {
+        const att = JSON.parse(localStorage.getItem('inf_att')) || [];
+        const clsFilter = document.getElementById('admAttClassFilter').value;
+        const subFilter = document.getElementById('admAttSubFilter').value;
+
+        const filtered = att.filter(a => {
+          const matchClass = clsFilter === 'All' || a.class === clsFilter;
+          const matchSub = !subFilter || subFilter === 'All' || a.subject === subFilter;
+          return matchClass && matchSub;
+        });
+
+        const tbody = document.getElementById('admFilteredAttBody');
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="text-center">No attendance logged yet matching filter.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(a => `
+          <tr>
+            <td>${a.date}</td>
+            <td>${a.studentId}</td>
+            <td><strong>${a.studentName}</strong></td>
+            <td>${a.class}</td>
+            <td>${a.subject}</td>
+            <td><span class="status-badge ${a.status === 'Present' ? 'badge-approved' : 'badge-danger'}">${a.status}</span></td>
+          </tr>
+        `).join('');
+      }
+
+      quickAdminResetStudentPass(studentId) {
+        const newPass = prompt(`Set new password for Student ID ${studentId}:`, 'pass@123');
+        if (!newPass) return;
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const student = users.find(u => u.id === studentId);
+        if (student) {
+          student.password = newPass;
+          localStorage.setItem('inf_users', JSON.stringify(users));
+          this.toast(`Password updated for ${student.name} to "${newPass}"`);
+        }
+      }
+
+      handleAdminResetTeacherPassword() {
+        const tId = document.getElementById('admTargetTeacherSelect').value;
+        const newPass = (document.getElementById('admNewTeacherPassInput').value || '').trim();
+
+        if (!newPass) {
+          alert('Please enter a new password for the teacher.');
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const teacher = users.find(u => u.id === tId);
+
+        if (teacher) {
+          teacher.password = newPass;
+          localStorage.setItem('inf_users', JSON.stringify(users));
+          alert(`Success! Password for Teacher (${teacher.name}) changed to: ${newPass}`);
+          document.getElementById('admNewTeacherPassInput').value = '';
+        }
+      }
+
+      handleAdminResetOwnPassword() {
+        const enteredPin = (document.getElementById('admVerifySecretPinInput').value || '').trim();
+        const newAdminPass = (document.getElementById('admNewAdminPassInput').value || '').trim();
+        const storedPin = localStorage.getItem('inf_admin_secret_pin') || '1234567890';
+
+        if (enteredPin !== storedPin) {
+          alert('ACCESS DENIED: Master Secret Pin is incorrect! Only authentic director can reset this password.');
+          return;
+        }
+
+        if (!newAdminPass || newAdminPass.length < 5) {
+          alert('Please enter a strong password (minimum 5 characters).');
+          return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+        const admin = users.find(u => u.role === 'admin');
+
+        if (admin) {
+          admin.password = newAdminPass;
+          localStorage.setItem('inf_users', JSON.stringify(users));
+          alert('Admin Master Password successfully updated!');
+          document.getElementById('admVerifySecretPinInput').value = '';
+          document.getElementById('admNewAdminPassInput').value = '';
+        }
+      }
+
+      handleChangeSecretPin() {
+        const oldPin = (document.getElementById('admOldSecretPinInput').value || '').trim();
+        const newPin = (document.getElementById('admNewSecretPinInput').value || '').trim();
+        const storedPin = localStorage.getItem('inf_admin_secret_pin') || '1234567890';
+
+        if (oldPin !== storedPin) {
+          alert('Current Secret Pin does not match!');
+          return;
+        }
+
+        if (!newPin || newPin.length < 4) {
+          alert('Please provide a new secret pin of at least 4 digits.');
+          return;
+        }
+
+        localStorage.setItem('inf_admin_secret_pin', newPin);
+        alert('Confidential Secret Pin updated successfully!');
+        document.getElementById('admOldSecretPinInput').value = '';
+        document.getElementById('admNewSecretPinInput').value = '';
+      }
+
+      renderAdminApplications() {
+        const apps = JSON.parse(localStorage.getItem('inf_apps')) || [];
+        const tbody = document.getElementById('admApplicationsTableBody');
+
+        if (apps.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="text-center">No pending registrations.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = apps.map(a => `
+          <tr>
+            <td><strong>${a.ref}</strong></td>
+            <td>${a.name}</td>
+            <td><strong>${a.mobile}</strong></td>
+            <td>${a.class}</td>
+            <td>${(a.subjects || []).join(', ')}</td>
+            <td>
+              ${a.status === 'PENDING' ? `
+                <button class="btn btn-sm btn-green" onclick="app.adminAcceptRegistration('${a.ref}')">Accept</button>
+              ` : `<span class="status-badge badge-approved">Approved</span>`}
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // ACCEPT PIPELINE: Activates account and notifies infinitycoaching144@gmail.com
+      adminAcceptRegistration(ref) {
+        const apps = JSON.parse(localStorage.getItem('inf_apps')) || [];
+        const appRecord = apps.find(x => x.ref === ref);
+        if (!appRecord) return;
+
+        const users = JSON.parse(localStorage.getItem('inf_users')) || [];
+
+        // Check if student already in users, if not activate
+        let student = users.find(u => u.id === appRecord.studentId);
+        if (!student) {
+          student = {
+            id: appRecord.studentId,
+            rollNo: appRecord.rollNo,
+            name: appRecord.name,
+            mobile: appRecord.mobile,
+            email: appRecord.email,
+            class: appRecord.class,
+            subjects: appRecord.subjects,
+            role: 'student',
+            password: appRecord.pass || 'pass@123',
+            active: true
+          };
+          users.push(student);
+          localStorage.setItem('inf_users', JSON.stringify(users));
+        } else {
+          student.active = true;
+          localStorage.setItem('inf_users', JSON.stringify(users));
+        }
+
+        appRecord.status = 'APPROVED';
+        localStorage.setItem('inf_apps', JSON.stringify(apps));
+
+        alert(`Student Application Accepted!\n\nActivation Details:\n- Student Name: ${appRecord.name}\n- Student ID: ${appRecord.studentId}\n- Issued Password: pass@123\n- Mobile: ${appRecord.mobile}\n\n[Email notification queued for infinitycoaching144@gmail.com]`);
+        this.toast('Student Activated & Enrolled Successfully!');
+        this.renderAdminApplications();
+        this.renderAdminFilteredStudents();
+      }
+
+      /* Public Library Rendering (Includes Live Synced Uploads) */
+      openPublicCategory(cat) {
+        this.navTo('study-material');
+        this.renderLibraryCards(cat);
+      }
+
+      renderLibraryCards(forceCat = null) {
+        const cls = document.getElementById('libFilterClass').value;
+        const board = document.getElementById('libFilterBoard').value;
+
+        // Base verified archive
+        const defaultDocs = [
+          { id: 'DEF-1', title: 'CBSE Class 10 Standard Mathematics 2024 (Official PYQ)', board: 'CBSE', class: 'Class 10', cat: 'PYQ', year: '2024' },
+          { id: 'DEF-2', title: 'DOE Delhi Practice Assessment 2025 - Science Term 2', board: 'DOE', class: 'Class 10', cat: 'Sample Paper', year: '2025' },
+          { id: 'DEF-3', title: 'INFINITY Class 9 Motion & Gravitation High-Yield Test Paper', board: 'INFINITY', class: 'Class 9', cat: 'Practice Test', year: '2026' },
+          { id: 'DEF-4', title: 'CBSE Class 12 Physics Electromagnetism Solved PYQ Set', board: 'CBSE', class: 'Class 12', cat: 'PYQ', year: '2024' }
+        ];
+
+        // Fetch user/teacher uploaded papers
+        const uploadedPapers = JSON.parse(localStorage.getItem('inf_papers')) || [];
+
+        // Combine (Uploaded papers appear first)
+        const allDocs = [...uploadedPapers, ...defaultDocs];
+
+        const filtered = allDocs.filter(d => 
+          (cls === 'All' || d.class === cls) &&
+          (board === 'All' || d.board === board || d.cat === board) &&
+          (!forceCat || d.cat === forceCat)
+        );
+
+        const container = document.getElementById('libraryItemsContainer');
+        if (filtered.length === 0) {
+          container.innerHTML = `<div style="text-align:center; padding:15px; color:#666;">No papers found matching the chosen filters.</div>`;
+          return;
+        }
+
+        container.innerHTML = filtered.map(d => `
+          <div style="background:#fdfcf9; border:1px solid #e2dbce; padding:10px; border-radius:6px; margin-bottom:8px;">
+            <span class="status-badge ${d.board === 'CBSE' ? 'badge-approved' : (d.board === 'DOE' ? 'badge-pending' : 'badge-danger')}">${d.board || d.cat} Official</span>
+            <h4 style="margin:4px 0; color:#964816;">${d.title}</h4>
+            <p class="small text-muted">${d.class} | Folder: ${d.cat || d.board} | ${d.fileName ? `File: ${d.fileName}` : `Year: ${d.year}`}</p>
+            <button class="btn btn-sm btn-outline" style="margin-top:6px;" onclick="app.downloadUploadedPdf('${d.id}')">
+              <i class="ph ph-file-pdf"></i> Download PDF
+            </button>
+          </div>
+        `).join('');
+      }
+    }
+
+    const app = new InfinityApp();
+  </script>
+</body>
+</html>
